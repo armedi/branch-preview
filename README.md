@@ -27,7 +27,16 @@ jobs:
           host: ${{ secrets.HOST }}
           domain: ${{ secrets.DOMAIN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_main_branch: 'main'
 ```
+
+You can refer to other version, or even the main brance like so:
+
+```yml
+  uses: hyperjumptech/branch-preview@main
+```
+
+For convenience, it may be easier to set the input variables as secrets in GitHub. You can then change the value on the fly
 
 ## Requirements
 
@@ -46,7 +55,36 @@ You need the following requirements. Please store keys and tokens in secret.
 
 ## Output
 
-A dokku app is created from your branch name so that branch should be deployed to `branch_name.yourdomain.com`.
+A dokku app is created from your branch name so that branch should be deployed to `branch_name.yourdomain.com` when branch_main is not the git primary branch (main/master).
+
+In dokku's view your `branch_name` is just an app. You can check the apps in your dokku by issueing: `dokku apps:list`  
+
+## Troubleshooting
+
+The best way to troubleshoot is to check whether you are able to push from your local to the dokku. All the rights and keys should work from local as from GitHub Actions.
+
+On your local check if this works:
+
+`git push mydokku main:master`
+
+Where `mydokku` is your remote dokku location that you've set using `git remote add mydokku <some address>`.
+
+In the example `main` is just your local git branch as source, it is the default GitHub primary branch. If your local is also `master`, it would look `master:master` in the command above.
+
+If everything works from local, it should transfer seamlessly in GitHub Action. If not, look for the differences.
+
+One note on environment secrets. They do not show up as *** in logs, something to note when debugging.
+
+## Contributing
+
+Find any issues? Feedback? Fork, fix and send the PRs this way!
+
+## Docs
+
+1. [changelog](./CHANGELOG.md)
+2. [code of conduct](./code_of_conduct.md)
+3. [LICENSE](./LICENSE)
+
 
 --  
 fork. clone. share.
