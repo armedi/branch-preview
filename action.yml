@@ -20,7 +20,7 @@ inputs:
   github_token:
     description: 'Github access token'
     required: true
-  github_main_branch:
+  github_primary_branch:
     description: 'Name of your primary branch, some use master, new default is main'
     required: false
     default: 'main'
@@ -36,5 +36,5 @@ runs:
         PORT: ${{ inputs.port }}
         DOMAIN: ${{ inputs.domain }}
         GITHUB_TOKEN: ${{ inputs.github_token }}
-        GITHUB_MAIN_BRANCH: ${{ inputs.github_main_branch}}
+        GITHUB_PRIMARY_BRANCH: ${{ inputs.github_primary_branch}}
         

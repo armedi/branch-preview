@@ -27,7 +27,7 @@ jobs:
           host: ${{ secrets.HOST }}
           domain: ${{ secrets.DOMAIN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_main_branch: 'main'
+          github_primary_branch: 'main'
 ```
 
 You can refer to other version, or even the main brance like so:
@@ -49,9 +49,11 @@ You need the following requirements. Please store keys and tokens in secret.
 | Requirement  | Description                                                                            |
 | :----------- | :------------------------------------------------------------------------------------- |
 | host         | Dokku Host address (ip) to push your branch to                                         |
+| port         | (optional) If your ssh conenction to dokku is not standard 22, set it here.            |
 | domain       | Domain to map your deployed branches to                                                |
 | dokku_key    | Private/SSH Key to your Dokku instance                                                 |
-| github_token | Github access token. Just use `secrets.GITHUB_TOKEN`, it's provided by github workflow |
+| github_token | (automatic) Github access token already provided by github workflow, included for documentation |
+| github_primary_branch | (optional) This is your primary git branch, GitHub now defaults to main. set it here |
 
 ## Output
 
