@@ -9,7 +9,7 @@ mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 echo -e "$DOKKU_KEY" > ~/.ssh/id_rsa
 chmod 600 ~/.ssh/id_rsa
-ssh-keyscan "$HOST" >> ~/.ssh/known_hosts
+ssh-keyscan -p $PORT "$HOST" >> ~/.ssh/known_hosts
 
 cd "$GITHUB_WORKSPACE" || exit
 
