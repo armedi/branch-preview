@@ -24,13 +24,13 @@ fi
 echo "APP_NAME defined as $APP_NAME"
 
 echo "Checking if app exists"
-if ! ssh "dokku@$HOST -p $PORT dokku apps:exists $APP_NAME"; then
+if ! ssh dokku@$HOST -p $PORT apps:exists $APP_NAME; then
     echo "The app does not exist yet, creating the app"
-    ssh "dokku@$HOST -p $PORT dokku apps:create $APP_NAME"
+    ssh dokku@$HOST -p $PORT apps:create $APP_NAME
 fi
 
 echo "Deploying to host: $HOST"
 git fetch --unshallow
-git remote add "$APP_NAME" "dokku@$HOST:$APP_NAME"
+git remote add "$APP_NAME" "ssh://dokku@$HOST:$PORT/$APP_NAME"
 git push -f "$APP_NAME" "$CURRENT_BRANCH:master"
 echo "done... thank you"
